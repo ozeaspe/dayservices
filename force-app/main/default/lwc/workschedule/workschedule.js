@@ -3,6 +3,7 @@ import { LightningElement, track } from 'lwc';
 export default class Workschedule extends LightningElement {
 
     // Valor selecionado atualmente
+    @track inputValue = '';
     @track value = '';
     @track calendar;
     @track selectedCheckbox = { name: '', checked: false };
@@ -81,7 +82,14 @@ export default class Workschedule extends LightningElement {
         };
     }
 
+    handleInputChange(event){
+        this.inputValue  = event.target.value
+    }
+
     handleGenerateShedule() {
+
+        console.log(this.inputValue);
+
         const message = this.selectedCheckbox.checked
             ? `Selected Day ${this.selectedCheckbox.label} ` 
             : ``;
@@ -91,7 +99,10 @@ export default class Workschedule extends LightningElement {
             : ``;
             
         alert(message + 'and' + message2);
+        
     }
+
+    
 
 }
     

@@ -3,7 +3,12 @@
     <lightning-card  variant="Narrow"  title="Shedule of work" icon-name="standard:disclosure_and_compliance">
         <div class="slds-panel__header_align-center slds-grid slds-gutters" style="width:700px">
             <div class="slds-col slds-size_8-of-12 slds-p-around_medium lgc-bg">
-                <lightning-input type="text" label="Name" placeholder="Enter name"></lightning-input>
+                <lightning-input type="text" 
+                    label="Name"
+                    value={inputValeu}
+                    placeholder="Enter name" 
+                    onchange={handleInputChange}>
+                </lightning-input>
             </div>
 
             <div class="slds-col slds-size_4-of-12 slds-p-around_medium lgc-bg">
