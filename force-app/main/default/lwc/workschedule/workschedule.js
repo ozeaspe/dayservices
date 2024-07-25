@@ -6,6 +6,9 @@ export default class Workschedule extends LightningElement {
     @track inputValue = '';
     @track value = '';
     @track calendar;
+    @track filteredCalendar = [];
+    showOddDays = false;
+    showEveDays = false;
     @track selectedCheckbox = { name: '', checked: false };
     @track selectedCheckbox2 = { name: '', checked: false };
 
@@ -57,6 +60,7 @@ export default class Workschedule extends LightningElement {
         }
         
         this.calendar = calendar;
+        
     }
 
     handleDayClick(event) {
@@ -67,11 +71,13 @@ export default class Workschedule extends LightningElement {
 
     
     handleCheckboxChange(event) {
-        this.selectedCheckbox = {
-            name: event.target.name,
-            checked: event.target.checked,
-            label: event.target.label
-        };
+        const name = event.target.name;
+        if (name === 'odd') {
+            this.showOddDays = event.target.checked;
+        } else if (name === 'even') {
+            this.showEvenDays = event.target.checked;
+        }
+        this.filterCalendar();
     }
 
     handleCheckboxChange2(event) {
@@ -82,6 +88,28 @@ export default class Workschedule extends LightningElement {
         };
     }
 
+    filterCalendar() {
+        if (this.showOddDays || this.showEvenDays) {
+            this.filteredCalendar = this.calendar.map(week => 
+                week.map(day => {
+                    if (typeof day === 'number') {
+                        if (this.showOddDays && day % 2 !== 0) {
+                            return day;
+                        } else if (this.showEvenDays && day % 2 === 0) {
+                            return day;
+                        } else {
+                            return '';
+                        }
+                    } else {
+                        return day;
+                    }
+                })
+            );
+        } else {
+            this.filteredCalendar = this.calendar;
+        }
+    }
+
     handleInputChange(event){
         this.inputValue  = event.target.value
     }
@@ -89,6 +117,7 @@ export default class Workschedule extends LightningElement {
     handleGenerateShedule() {
 
         console.log(this.inputValue);
+        console.log(this.filteredCalendar);
 
         const message = this.selectedCheckbox.checked
             ? `Selected Day ${this.selectedCheckbox.label} ` 

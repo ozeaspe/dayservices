@@ -27,7 +27,7 @@
 
         <div class="slds-panel__header_align-center slds-grid slds-gutters" style="width:500px">
             <div class=" slds-col slds-size_4-of-12 slds-m-left_medium slds-m-bottom_x-small slds-p-around_medium lgc-bg">
-                <h2>Select odd or pair</h2>
+                <h2>Select odd or pair</h2>      
                 <lightning-input type="checkbox" label="Odd" name="odd" onchange={handleCheckboxChange}></lightning-input>
                 <lightning-input type="checkbox" label="Pair" name="pair" onchange={handleCheckboxChange}></lightning-input>
             </div>
@@ -57,7 +57,7 @@
                                 <tr key={week.index}>
                                     <template for:each={week} for:item="day" for:index="index">
                                         <td key={day.index}>
-                                            <button data-id={dayIndex} onclick={handleDayClick}>
+                                            <button data-id={day.index} onclick={handleDayClick}>
                                                 {day}
                                             </button></td>
                                     </template>
